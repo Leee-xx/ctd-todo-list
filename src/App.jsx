@@ -17,7 +17,6 @@ function App() {
   }
 
   function completeTodo(todoId) {
-      console.log(todoId)
     const newTodoList = todoList.map((todo) => {
       if (todo.id === todoId) {
         return { ...todo, isCompleted: true }
@@ -26,7 +25,6 @@ function App() {
       }
     })
 
-    console.log("SET NEW TODO", newTodoList)
     setTodoList(newTodoList)
   }
 
