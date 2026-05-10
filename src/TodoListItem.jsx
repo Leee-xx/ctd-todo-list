@@ -1,39 +1,30 @@
 import { useState } from 'react'
 import TextInputWithLabel from './shared/TextInputWithLabel.jsx'
 import { isValidTodoTitle } from './utils/todoValidation.js'
+import useEditableTitle from './hooks/useEditableTitle.js'
 
 function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
-  const [isEditing, setIsEditing] = useState(false)
-  const [workingTitle, setWorkingTitle] = useState(todo.title)
-
-  function handleCancel() {
-    setWorkingTitle(todo.title)
-    setIsEditing(false)
-  }
-
-  function handleEdit(e) {
-    setWorkingTitle(e.target.value)
-  }
-
-  function handleUpdate(e) {
-    if (isEditing) {
-      e.preventDefault()
-      if (isValidTodoTitle(workingTitle)) {
-        onUpdateTodo({ ...todo, title: workingTitle.trim() })
-        setIsEditing(false)
-      }
-    } else {
-      return
-    }
-  }
+  const {
+    isEditing,
+    workingTitle,
+    startEditing,
+    cancelEdit,
+    updateTitle,
+    finishEdit
+  } = useEditableTitle(todo.title)
 
   return(
     <li>
       {isEditing ? (
         <>
-          <TextInputWithLabel value={workingTitle} onChange={handleEdit} />
-          <button type='button' onClick={handleCancel}>Cancel</button>
-          <button type='button' onClick={handleUpdate}>Update</button>
+          <TextInputWithLabel value={workingTitle} onChange={(e) => updateTitle(event.target.value)} />
+          <button type='button' onClick={cancelEdit}>Cancel</button>
+          <button type='button' onClick={(e) => {
+            if (!isEditing) return
+            event.preventDefault()
+            const finalTitle = finishEdit()
+            onUpdateTodo({ ...todo, title: finalTitle })
+          }}>Update</button>
         </>
       ) : (
         <>
@@ -42,7 +33,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             checked={todo.isCompleted}
             onChange={() => onCompleteTodo(todo.id)}
           />
-          <span onClick={() => setIsEditing(true)}>{todo.title}</span>
+          <span onClick={startEditing}>{todo.title}</span>
         </>
       )}
     </li>
