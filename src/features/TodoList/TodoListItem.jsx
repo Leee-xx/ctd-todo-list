@@ -1,7 +1,5 @@
-import { useState } from 'react'
-import TextInputWithLabel from './shared/TextInputWithLabel.jsx'
-import { isValidTodoTitle } from './utils/todoValidation.js'
-import useEditableTitle from './hooks/useEditableTitle.js'
+import TextInputWithLabel from '../../shared/TextInputWithLabel.jsx'
+import { useEditableTitle } from '../../hooks/useEditableTitle.js'
 
 function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   const {
@@ -15,13 +13,14 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
 
   return(
     <li>
+      <form onSubmit=''>
       {isEditing ? (
         <>
-          <TextInputWithLabel value={workingTitle} onChange={(e) => updateTitle(event.target.value)} />
+          <TextInputWithLabel value={workingTitle} onChange={(e) => updateTitle(e.target.value)} />
           <button type='button' onClick={cancelEdit}>Cancel</button>
           <button type='button' onClick={(e) => {
             if (!isEditing) return
-            event.preventDefault()
+            e.preventDefault()
             const finalTitle = finishEdit()
             onUpdateTodo({ ...todo, title: finalTitle })
           }}>Update</button>
@@ -36,6 +35,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
           <span onClick={startEditing}>{todo.title}</span>
         </>
       )}
+      </form>
     </li>
   )
 }

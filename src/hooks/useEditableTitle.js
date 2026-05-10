@@ -5,12 +5,12 @@ export function useEditableTitle(initialTitle) {
   const [workingTitle, setWorkingTitle] = useState(initialTitle)
 
   const startEditing = () => {
-    setWorkingTtile(initialTitle)
+    setWorkingTitle(initialTitle)
     setIsEditing(true)
   }
 
   const cancelEdit = () => {
-    setWorkingTitle(initialValue)
+    setWorkingTitle(initialTitle)
     setIsEditing(false)
   }
 
