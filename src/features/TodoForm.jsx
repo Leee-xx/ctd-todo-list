@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
-import TextInputWithLabel from '../../shared/TextInputWithLabel.jsx'
-import { isValidTodoTitle } from '../../utils/todoValidation.js'
+import TextInputWithLabel from '../shared/TextInputWithLabel.jsx'
+import { isValidTodoTitle } from '../utils/todoValidation.js'
 
 const TodoForm = ({ onAddTodo }) => {
   const [workingTodoTitle, setWorkingTodoTitle] = useState('')
