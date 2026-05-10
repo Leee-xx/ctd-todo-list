@@ -17,7 +17,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
       <form onSubmit={onUpdateTodo}>
       {isEditing ? (
         <>
-          <TextInputWithLabel labelText={''} value={workingTitle} onChange={(e) => updateTitle(e.target.value)} />
+          <TextInputWithLabel labelText={'edit todo: '} elementId={todo.id} value={workingTitle} onChange={(e) => updateTitle(e.target.value)} />
           <button type='button' onClick={cancelEdit}>Cancel</button>
           <button
             type='button'
