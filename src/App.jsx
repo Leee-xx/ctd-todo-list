@@ -1,12 +1,23 @@
+import { useState } from 'react'
 import './App.css'
 import Header from './shared/Header.jsx'
 import TodosPage from './features/Todos/TodosPage.jsx'
+import Logon from './features/Logon.jsx'
 
 function App() {
+  const [email, setEmail] = useState('')
+  const [token, setToken] = useState('')
+
   return(
     <>
-      <Header />
-      <TodosPage />
+      <Header token={token} onSetEmail={setEmail} onSetToken={setToken} />
+      {
+        token === '' ? (
+          <Logon onSetEmail={setEmail} onSetToken={setToken} />
+        ) : (
+          <TodosPage token={token} />
+        )
+      }
     </>
   )
 }

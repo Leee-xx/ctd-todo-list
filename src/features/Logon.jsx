@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import TextWithInputLabel from '../shared/TextWithInputLabel.jsx'
+import TextInputWithLabel from '../shared/TextInputWithLabel.jsx'
 
-function Logon({ onSetEmail = () => {}, onSetToken = () => {} }) {
+function Logon({ onSetEmail = setEmail, onSetToken = () => {} }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [authError, setAuthError] = useState('')
@@ -12,7 +12,7 @@ function Logon({ onSetEmail = () => {}, onSetToken = () => {} }) {
 
     setIsLoggingOn(true)
 
-    try{
+    try {
       const resp = await fetch('/api/users/logon', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
@@ -36,15 +36,23 @@ function Logon({ onSetEmail = () => {}, onSetToken = () => {} }) {
   }
 
   return(
-    <form>
-      <TextWithInputLabel
+    <form onSubmit={handleSubmit}>
+      { authError && (<p className='error'>Error: {authError}</p>) }
+      <TextInputWithLabel
         labelText='Email:'
         id='email'
         name='email'
         value={email}
-        onChange={(e) => { setEmail(e.target.value) }
+        onChange={(e) => { setEmail(e.target.value) }}
       />
-      <button type='submit' />Log in</button>
+      <TextInputWithLabel
+        labelText='Password:'
+        id='password'
+        name='password'
+        value={password}
+        onChange={(e) => { setPassword(e.target.value) }}
+      />
+      <button type='submit' disabled={isLoggingOn}>Log in</button>
     </form>
   )
 }
