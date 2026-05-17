@@ -2,7 +2,7 @@ import { useState } from 'react'
 import TodoList from './TodoList/TodoList.jsx'
 import TodoForm from './TodoForm.jsx'
 
-function TodosPage() {
+function TodosPage({ token }) {
   const [todoList, setTodoList] = useState([])
 
   function addTodo(todoTitle) {
