@@ -49,7 +49,7 @@ function TodosPage({ token }) {
     setTodoList(previous => [newTodo, ...previous])
 
     try {
-      const resp = await fetch('/api/tasks/', {
+      const resp = await fetch('/api/tasks', {
         method: 'POST',
         body: JSON.stringify({ title: todoTitle, isCompleted: false }),
         headers: {
@@ -99,6 +99,7 @@ function TodosPage({ token }) {
           'X-CSRF-TOKEN': token,
           'Content-Type': 'application/json'
         },
+        credentials: 'include'
       })
 
       const data = await resp.json()

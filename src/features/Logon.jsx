@@ -3,7 +3,6 @@ import TextInputWithLabel from '../shared/TextInputWithLabel.jsx'
 
 function Logon({ onSetEmail, onSetToken }) {
   const [email, setEmail] = useState('')
-  const [token, setToken] = useState('')
   const [password, setPassword] = useState('')
   const [authError, setAuthError] = useState('')
   const [isLoggingOn, setIsLoggingOn] = useState(false)
