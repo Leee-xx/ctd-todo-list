@@ -145,7 +145,9 @@ function TodosPage({ token }) {
     } catch (err) {
       console.error(err)
       setError(err.message)
-      setTodoList(prev => [{ ...completedTodo, isCompleted: false }, ...prev])
+      setTodoList(prev => prev.map((todo) => {
+        return todo.id === completedTodo.id ? { ...todo, isCompleted: false } : todo
+      }))
     }
   }
 
