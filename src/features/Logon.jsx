@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import TextInputWithLabel from '../shared/TextInputWithLabel.jsx'
 
-function Logon({ onSetEmail = setEmail, onSetToken = () => {} }) {
+function Logon({ onSetEmail = setEmail, onSetToken = setToken }) {
   const [email, setEmail] = useState('')
+  const [token, setToken] = useState('')
   const [password, setPassword] = useState('')
   const [authError, setAuthError] = useState('')
   const [isLoggingOn, setIsLoggingOn] = useState(false)
@@ -23,13 +24,13 @@ function Logon({ onSetEmail = setEmail, onSetToken = () => {} }) {
       })
       const data = await resp.json()
       if (resp.status == 200 && data.name && data.csrfToken) {
-        onSetEmail()
-        onSetToken()
+        onSetEmail(data.email)
+        onSetToken(data.csrfToken)
       } else {
         setAuthError(`Authentication failed: ${data?.message}`)
       }
     } catch (error) {
-      setAuthError(`Error: ${data?.message}`)
+      setAuthError(`Error: ${error.message}`)
     } finally {
       setIsLoggingOn(false)
     }
