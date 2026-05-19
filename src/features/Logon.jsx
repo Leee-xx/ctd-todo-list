@@ -44,6 +44,7 @@ function Logon({ onSetEmail, onSetToken }) {
         name='email'
         value={email}
         onChange={(e) => { setEmail(e.target.value) }}
+        required
       />
       <TextInputWithLabel
         labelText='Password:'
@@ -51,6 +52,7 @@ function Logon({ onSetEmail, onSetToken }) {
         name='password'
         value={password}
         onChange={(e) => { setPassword(e.target.value) }}
+        required
       />
       <button type='submit' disabled={isLoggingOn}>{isLoggingOn ? "Logging in..." : "Log in"}</button>
     </form>
