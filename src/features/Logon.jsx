@@ -48,7 +48,7 @@ function Logon({ onSetEmail, onSetToken }) {
       />
       <TextInputWithLabel
         labelText='Password:'
-        id='password'
+        elementId='password'
         name='password'
         value={password}
         onChange={(e) => { setPassword(e.target.value) }}
