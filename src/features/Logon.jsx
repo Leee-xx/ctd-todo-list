@@ -40,7 +40,7 @@ function Logon({ onSetEmail, onSetToken }) {
       { authError && (<p className='error'>Error: {authError}</p>) }
       <TextInputWithLabel
         labelText='Email:'
-        id='email'
+        elementId='email'
         name='email'
         value={email}
         onChange={(e) => { setEmail(e.target.value) }}
