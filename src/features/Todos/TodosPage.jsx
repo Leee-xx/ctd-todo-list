@@ -218,7 +218,7 @@ function TodosPage({ token }) {
       />
       <FilterInput
         filterTerm={filterTerm}
-        onFilterChange={setFilterTerm}
+        onFilterChange={handleFilterChange}
       />
       <TodoForm onAddTodo={addTodo} />
       <TodoList
