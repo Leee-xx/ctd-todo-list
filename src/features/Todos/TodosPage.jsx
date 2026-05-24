@@ -205,7 +205,7 @@ function TodosPage({ token }) {
               setSortDirection('desc')
               setFilterError('')
             }}>
-              ResetFilters
+              Reset Filters
             </button>
           </div>
         )
