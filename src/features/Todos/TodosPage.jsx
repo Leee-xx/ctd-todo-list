@@ -13,8 +13,9 @@ import {
   initialTodoState,
   TODO_ACTIONS
 } from '../../reducers/todoReducer.js'
+import { useAuth } from '../../contexts/AuthContext.jsx'
 
-function TodosPage({ token }) {
+function TodosPage() {
   const [state, dispatch] = useReducer(todoReducer, initialTodoState)
   const {
     todoList,
@@ -26,6 +27,8 @@ function TodosPage({ token }) {
     dataVersion,
     filterError
   } = state
+
+  const { token } = useAuth()
 
   const debouncedFilterTerm = useDebounce(filterTerm, 300)
 
@@ -84,8 +87,9 @@ function TodosPage({ token }) {
       }
     }
 
-    if (token)
+    if (token) {
       fetchTodos()
+    }
   }, [token, sortBy, sortDirection, debouncedFilterTerm])
 
   async function addTodo(todoTitle) {
