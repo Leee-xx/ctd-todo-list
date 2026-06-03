@@ -63,6 +63,8 @@ function TodosPage() {
           })
         } else if (resp.status == 401) {
           throw new Error('unauthorized')
+        } else if (resp.status == 404 && debouncedFilterTerm) {
+          throw new Error(`No todos found with terms matching "${debouncedFilterTerm}"`)
         } else {
           throw new Error(`Unhandled exception: ${resp.status}`)
         }
@@ -197,7 +199,10 @@ function TodosPage() {
       })
 
       if (resp.ok) {
-        dispatch({ type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS })
+        dispatch({
+          type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS,
+          payload: { todoId }
+        })
       } else {
         const data = await resp.json()
         throw new Error(`Couldn't complete todo: ${data?.message}`)
