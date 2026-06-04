@@ -68,7 +68,7 @@ function TodosPage() {
           throw new Error(`Unhandled exception: ${resp.status}`)
         }
       } catch (err) {
-        if (debouncedFilterTerm || sortBy !== 'creationDate' || sortDirection !== 'desc') {
+        if (debouncedFilterTerm || sortBy !== 'createdAt' || sortDirection !== 'asc') {
           dispatch({
             type: TODO_ACTIONS.FETCH_ERROR,
             payload: {
