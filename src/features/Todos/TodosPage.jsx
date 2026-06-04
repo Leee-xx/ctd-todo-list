@@ -1,6 +1,5 @@
-import { useState,
+import {
 	useEffect,
-	useCallback,
 	useReducer
 } from 'react'
 import TodoList from './TodoList/TodoList.jsx'
@@ -8,7 +7,7 @@ import TodoForm from './TodoForm.jsx'
 import SortBy from '../../shared/SortBy.jsx'
 import FilterInput from '../../shared/FilterInput.jsx'
 import useDebounce from '../../utils/useDebounce.js'
-import { 
+import {
   todoReducer,
   initialTodoState,
   TODO_ACTIONS
@@ -82,7 +81,7 @@ function TodosPage() {
             type: TODO_ACTIONS.FETCH_ERROR,
             payload: {
               error: `Error fetching todos: ${err.message}`,
-              isFilterError: true
+              isFilterError: false
             }
           })
         }
@@ -167,7 +166,7 @@ function TodosPage() {
       }
     } catch (err) {
       console.error(err)
-      dipsatch({
+      dispatch({
         type: TODO_ACTIONS.UPDATE_TODO_ERROR,
         payload: {
           error: err.message,

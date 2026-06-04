@@ -9,12 +9,13 @@ export default function Logoff() {
 
   async function handleLogoff(event) {
     event.preventDefault()
+    setIsLoggingOut(true)
     const resp = await logout()
-    if (!resp.sucess) {
+    if (!resp.success) {
       setAuthError(resp.error)
     }
 
-    console.log(resp)
+    setIsLoggingOut(false)
   }
 
   return(
