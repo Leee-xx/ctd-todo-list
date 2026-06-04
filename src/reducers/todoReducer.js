@@ -22,7 +22,7 @@ export const TODO_ACTIONS = {
   // ui
   SET_SORT: 'SET_SORT',
   SET_FILTER: 'SET_FILTER',
-  RESET_FILTER: 'RESET_FILTER',
+  RESET_FILTERS: 'RESET_FILTERS',
   CLEAR_ERROR: 'CLEAR_ERROR',
   CLEAR_FILTER_ERROR: 'CLEAR_FILTER_ERROR',
 }
@@ -83,7 +83,7 @@ export function todoReducer(state, action) {
         ),
         error: '',
         filterError: '',
-        //dataVersion: state.dataVersion + 1
+        dataVersion: state.dataVersion + 1
       }
 
     case TODO_ACTIONS.ADD_TODO_ERROR:
@@ -145,7 +145,7 @@ export function todoReducer(state, action) {
       return {
         ...state,
         error: '',
-        //dataVersion: state.dataVersion + 1
+        dataVersion: state.dataVersion + 1
       }
 
     case TODO_ACTIONS.UPDATE_TODO_ERROR:
@@ -173,7 +173,7 @@ export function todoReducer(state, action) {
         filterError: ''
       }
 
-    case TODO_ACTIONS.RESET_FILTER:
+    case TODO_ACTIONS.RESET_FILTERS:
       return {
         ...state,
         filterTerm: '',

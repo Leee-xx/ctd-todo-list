@@ -248,7 +248,7 @@ function TodosPage() {
               Clear Filter Error
             </button>
             <button onClick={() => {
-              dispatch({ type: TODO_ACTIONS.RESET_FILTER })
+              dispatch({ type: TODO_ACTIONS.RESET_FILTERS })
             }}>
               Reset Filters
             </button>
