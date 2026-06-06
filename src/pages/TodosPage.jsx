@@ -2,17 +2,20 @@ import {
 	useEffect,
 	useReducer
 } from 'react'
-import TodoList from './TodoList/TodoList.jsx'
-import TodoForm from './TodoForm.jsx'
-import SortBy from '../../shared/SortBy.jsx'
-import FilterInput from '../../shared/FilterInput.jsx'
-import useDebounce from '../../utils/useDebounce.js'
-import {
+import { useSearchParams } from 'react-router'
+import TodoList from '../features/Todos/TodoList/TodoList.jsx'
+import TodoForm from '../features/Todos/TodoForm.jsx'
+import SortBy from '../shared/SortBy.jsx'
+import FilterInput from '../shared/FilterInput.jsx'
+import useDebounce from '../utils/useDebounce.js'
+import StatusFilter from '../shared/StatusFilter.jsx'
+import { 
   todoReducer,
   initialTodoState,
   TODO_ACTIONS
-} from '../../reducers/todoReducer.js'
-import { useAuth } from '../../contexts/AuthContext.jsx'
+} from '../reducers/todoReducer.js'
+import { useAuth } from '../contexts/AuthContext.jsx'
+import useTodosFetch from '../utils/useTodosFetch.js'
 
 function TodosPage() {
   const [state, dispatch] = useReducer(todoReducer, initialTodoState)
@@ -28,22 +31,24 @@ function TodosPage() {
   } = state
 
   const { token } = useAuth()
-
+  const [searchParams] = useSearchParams()
   const debouncedFilterTerm = useDebounce(filterTerm, 300)
+  const statusFilter = searchParams.get('status') || 'all'
 
   useEffect(() => {
     async function fetchTodos() {
       dispatch({ type: TODO_ACTIONS.FETCH_START })
 
       try {
-        let paramsObj = {
+        let params = {
           sortBy,
           sortDirection,
         }
         if (debouncedFilterTerm) {
-          paramsObj.find = debouncedFilterTerm
+          params.find = debouncedFilterTerm
         }
 
+        /*
         const params = new URLSearchParams(paramsObj)
 
         const resp = await fetch(`/api/tasks?${params}`, {
@@ -54,6 +59,8 @@ function TodosPage() {
           credentials: 'include'
         })
 
+*/
+        const resp = await useTodosFetch({ token, params })
         if (resp.ok) {
           const data = await resp.json()
           dispatch({
@@ -277,6 +284,7 @@ function TodosPage() {
           })
         }}
       />
+      <StatusFilter />
       <FilterInput
         filterTerm={filterTerm}
         onFilterChange={(newTerm) => handleFilterChange(newTerm)}
@@ -287,6 +295,7 @@ function TodosPage() {
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
         dataVersion={dataVersion}
+        statusFilter={statusFilter}
       />
     </div>
   )

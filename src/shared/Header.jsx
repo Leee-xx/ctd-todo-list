@@ -1,6 +1,11 @@
+import Navigation from './Navigation.jsx'
+
 function Header() {
   return(
-    <h1>Todo List</h1>
+    <div>
+      <h1>Todo List</h1>
+      <Navigation />
+    </div>
   )
 }
 
