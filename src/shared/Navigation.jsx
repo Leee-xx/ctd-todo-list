@@ -9,7 +9,7 @@ export default function Navigation() {
     if (isActive) {
       return {
         fontWeight: 'bold',
-        textDecoration: 'underlined',
+        textDecoration: 'underline',
       }
     } else {
       return {

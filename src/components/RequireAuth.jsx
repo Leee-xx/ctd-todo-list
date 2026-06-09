@@ -10,9 +10,7 @@ export default function RequireAuth({ children }) {
   const currentLocation = location.pathname
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate(location, { replace: true })
-    } else {
+    if (!isAuthenticated) {
       navigate('/login',
         {
           replace: true,
