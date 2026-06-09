@@ -22,7 +22,7 @@ export default function RequireAuth({ children }) {
         }
       )
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated, currentLocation, navigate])
 
 
   if (!isAuthenticated) {

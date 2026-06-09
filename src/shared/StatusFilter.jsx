@@ -22,9 +22,9 @@ export default function StatusFilter() {
         value={currentStatus}
         onChange={(e) => { handleStatusChange(e.target.value) }}
       >
-        <option value='all'>All</option>
-        <option value='active'>Active</option>
-        <option value='completed'>Completed</option>
+        <option value='all'>All todos</option>
+        <option value='active'>Active todos</option>
+        <option value='completed'>Completed todos</option>
       </select>
     </div>
   )

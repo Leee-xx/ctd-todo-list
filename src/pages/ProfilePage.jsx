@@ -45,7 +45,7 @@ export default function ProfilePage() {
     <div>
       <h1>Welcome, {email}</h1>
       {
-        error && <p class='error'>{error}</p>
+        error && <p className='error'>{error}</p>
       }
       {
         loading ?
