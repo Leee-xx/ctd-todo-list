@@ -3,7 +3,6 @@ import { useAuth } from '../contexts/AuthContext.jsx'
 import useTodosFetch from '../utils/useTodosFetch.js'
 
 export default function ProfilePage() {
-  //const [todos, setTodos] = useState([])
   const [todoStats, setTodoStats] = useState({})
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')

@@ -9,7 +9,7 @@ import SortBy from '../shared/SortBy.jsx'
 import FilterInput from '../shared/FilterInput.jsx'
 import useDebounce from '../utils/useDebounce.js'
 import StatusFilter from '../shared/StatusFilter.jsx'
-import { 
+import {
   todoReducer,
   initialTodoState,
   TODO_ACTIONS
@@ -48,18 +48,6 @@ function TodosPage() {
           params.find = debouncedFilterTerm
         }
 
-        /*
-        const params = new URLSearchParams(paramsObj)
-
-        const resp = await fetch(`/api/tasks?${params}`, {
-          method: 'GET',
-          headers: {
-            'X-CSRF-TOKEN': token,
-          },
-          credentials: 'include'
-        })
-
-*/
         const resp = await useTodosFetch({ token, params })
         if (resp.ok) {
           const data = await resp.json()
