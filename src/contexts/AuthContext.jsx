@@ -14,7 +14,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [email, setEmail] = useState('')
-  const [token, setToken] = useState('')
+  const [token, setToken] = useState(window.localStorage.getItem('todoToken') || '')
 
   const login = async (userEmail, password) => {
     try {
@@ -31,6 +31,7 @@ export function AuthProvider({ children }) {
       if (res.status === 200 && data.name && data.csrfToken) {
         setEmail(data.name)
         setToken(data.csrfToken)
+        window.localStorage.setItem('todoToken', data.csrfToken)
         return { success: true }
       } else {
         return {
@@ -57,6 +58,7 @@ export function AuthProvider({ children }) {
         }
         const res = await fetch('/api/users/logoff', options)
         if (res.status === 200) {
+          window.localStorage.removeItem('todoToken')
           return { success: true }
         } else {
           return {

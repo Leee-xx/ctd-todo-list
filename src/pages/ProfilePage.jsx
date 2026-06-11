@@ -15,7 +15,7 @@ export default function ProfilePage() {
       try {
         const resp = await useTodosFetch({ token })
 
-        if (resp.status === 401) { 
+        if (resp.status === 401) {
           throw new Error('Unauthorized')
         }
         if (resp.ok) {
