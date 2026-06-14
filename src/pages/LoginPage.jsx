@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router'
+import Button from 'react-bootstrap/Button'
+
 import { useAuth } from '../contexts/AuthContext.jsx'
 import TextInputWithLabel from '../shared/TextInputWithLabel.jsx'
 
@@ -55,7 +57,7 @@ export default function LoginPage() {
         onChange={(e) => { setPassword(e.target.value) }}
         required
       />
-      <button type='submit' disabled={isLoggingOn}>{isLoggingOn ? "Logging in..." : "Log in"}</button>
+      <Button type='submit' disabled={isLoggingOn}>{isLoggingOn ? "Logging in..." : "Log in"}</Button>
     </form>
   )
 }
