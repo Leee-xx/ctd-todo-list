@@ -50,6 +50,7 @@ export default function LoginPage() {
         labelText='Password:'
         elementId='password'
         name='password'
+        type='password'
         value={password}
         onChange={(e) => { setPassword(e.target.value) }}
         required
