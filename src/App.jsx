@@ -11,6 +11,7 @@ import ProfilePage from './pages/ProfilePage'
 import NotFoundPage from './pages/NotFoundPage'
 import RequireAuth from './components/RequireAuth'
 import Header from './shared/Header.jsx'
+import Footer from './shared/Footer.jsx'
 
 function App() {
   return(
@@ -44,6 +45,7 @@ function App() {
           element={<NotFoundPage />}
         />
       </Routes>
+      <Footer />
     </Container>
   )
 }
