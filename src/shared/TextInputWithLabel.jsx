@@ -9,7 +9,7 @@ const TextInputWithLabel = ({
 }) => {
   return(
     <>
-      <label htmlFor={elementId}>{labelText}</label>
+      <label className='input-label' htmlFor={elementId}>{labelText}</label>
       <input
         type={type}
         ref={ref}

@@ -1,3 +1,40 @@
 .error {
   color: red;
 }
+
+label {
+  padding: 5px;
+}
+
+a.menu {
+  padding: 5px;
+}
+
+a.menu:hover {
+  background-color: #F7BBFC;
+}
+
+button.accordion-button:hover {
+  background: #F7BBFC;
+}
+
+div#todo-app .btn-margin {
+  margin: 10px;
+}
+
+span.todo-title {
+  padding: 5px;
+}
+
+span.completed {
+  text-decoration: line-through;
+  color: #808080;
+}
+
+ul.todo-list {
+  list-style-type: none;
+}
+
+ul.todo-list li {
+  border: 1px;
+}

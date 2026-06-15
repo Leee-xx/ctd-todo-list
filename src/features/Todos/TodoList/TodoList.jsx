@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+
 import TodoListItem from './TodoListItem.jsx'
 
 function TodoList({ todoList,
@@ -46,7 +47,7 @@ function TodoList({ todoList,
       {
         filteredTodoList.todos.length === 0 ?
           <p>{getEmptyMessage()}</p> :
-          <ul>
+          <ul className='todo-list'>
             {
               filteredTodoList.todos.map((item) => {
                 return <TodoListItem key={item.id} todo={item} onCompleteTodo={onCompleteTodo} onUpdateTodo={onUpdateTodo} />

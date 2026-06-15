@@ -28,22 +28,22 @@ export default function Navigation() {
         }}
       >
         <li>
-          <NavLink to='/about' style={navLinkStyle}>About</NavLink>
+          <NavLink to='/about' className='menu' style={navLinkStyle}>About</NavLink>
         </li>
         {isAuthenticated ?
             (
               <>
                 <li>
-                  <NavLink to='/todos' style={navLinkStyle}>Todos</NavLink>
+                  <NavLink to='/todos' className='menu' style={navLinkStyle}>Todos</NavLink>
                 </li>
                 <li>
-                  <NavLink to='/profile' style={navLinkStyle}>Profile</NavLink>
+                  <NavLink to='/profile' className='menu' style={navLinkStyle}>Profile</NavLink>
                 </li>
               </>
             )
             :
               <li>
-                <NavLink to='/login' style={navLinkStyle}>Login</NavLink>
+                <NavLink to='/login' className='menu' style={navLinkStyle}>Login</NavLink>
               </li>
         }
       </ul>

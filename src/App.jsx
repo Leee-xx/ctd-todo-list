@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router'
+import Container from 'react-bootstrap/Container';
 import './App.scss'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -13,7 +14,7 @@ import Header from './shared/Header.jsx'
 
 function App() {
   return(
-    <>
+    <Container fluid='md' id='todo-app'>
       <Header />
       <Routes>
         <Route path='/'
@@ -43,7 +44,7 @@ function App() {
           element={<NotFoundPage />}
         />
       </Routes>
-    </>
+    </Container>
   )
 }
 

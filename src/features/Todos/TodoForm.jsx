@@ -1,4 +1,7 @@
 import { useState, useRef } from 'react'
+
+import Button from 'react-bootstrap/Button'
+
 import TextInputWithLabel from '../../shared/TextInputWithLabel.jsx'
 import { isValidTodoTitle } from '../../utils/todoValidation.js'
 
@@ -22,14 +25,19 @@ const TodoForm = ({ onAddTodo }) => {
         ref={inputRef}
         type="text"
         elementId="todoTitle"
-        labelText='Todo'
         name="todoTitle"
-        placeholder={'Todo text'}
+        placeholder={'Add a new todo item'}
         value={workingTodoTitle}
         onChange={(e) => { setWorkingTodoTitle(e.target.value) } }
         required
       />
-      <button type="submit" disabled={!isValidTodoTitle(workingTodoTitle)}>Add Todo</button>
+      <Button
+        type="submit"
+        disabled={!isValidTodoTitle(workingTodoTitle)}
+        style={{ margin: '10px' }}
+      >
+        Add Todo
+      </Button>
     </form>
   )
 }

@@ -1,3 +1,5 @@
+import Button from 'react-bootstrap/Button'
+
 import TextInputWithLabel from '../../../shared/TextInputWithLabel.jsx'
 import { useEditableTitle } from '../../../hooks/useEditableTitle.js'
 import { isValidTodoTitle } from '../../../utils/todoValidation.js'
@@ -24,15 +26,21 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
       <form onSubmit={handleUpdate}>
       {isEditing ? (
         <>
-          <TextInputWithLabel labelText={'edit todo: '} elementId={todo.id} value={workingTitle} onChange={(e) => updateTitle(e.target.value)} />
-          <button type='button' onClick={cancelEdit}>Cancel</button>
-          <button
-            type='button'
+          <TextInputWithLabel labelText={'Edit: '} elementId={todo.id} value={workingTitle} onChange={(e) => updateTitle(e.target.value)} />
+          <Button
             onClick={handleUpdate}
+            className='btn-margin'
             disabled={!isValidTodoTitle(workingTitle)}
           >
             Update
-          </button>
+          </Button>
+          <Button
+            className='btn-margin'
+            onClick={cancelEdit}
+            variant='secondary'
+          >
+            Cancel
+          </Button>
         </>
       ) : (
         <>
@@ -41,7 +49,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             checked={todo.isCompleted}
             onChange={() => onCompleteTodo(todo.id)}
           />
-          <span onClick={startEditing}>{todo.title}</span>
+          <span className={`todo-title ${todo.isCompleted ? 'completed' : ''}`} onClick={startEditing}>{todo.title}</span>
         </>
       )}
       </form>
