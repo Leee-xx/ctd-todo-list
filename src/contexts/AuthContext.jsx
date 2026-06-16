@@ -67,7 +67,6 @@ export function AuthProvider({ children }) {
       }
     } catch (error) {
         const message = `Error logging out: ${error.message}`
-        console.error(message)
         return { success: false, error: message }
     } finally {
       setEmail('')

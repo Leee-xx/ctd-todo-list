@@ -1,5 +1,14 @@
+h1 {
+  padding-top: 20px;
+}
+
 .error {
   color: red;
+  padding: 10px;
+}
+.error:before {
+  content: '⚠️ ';
+  display: 'inline';
 }
 
 label {
@@ -37,4 +46,11 @@ ul.todo-list {
 
 ul.todo-list li {
   border: 1px;
+}
+
+.app-version {
+  font-family: 'Monaco', 'Courier New', monospace;
+  padding: 5px;
+  background-color: #fff7f0;
+  font-size: 80%;
 }

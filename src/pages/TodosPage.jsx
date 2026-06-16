@@ -5,6 +5,7 @@ import {
 import { useSearchParams } from 'react-router'
 
 import Accordion from 'react-bootstrap/Accordion'
+import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -130,7 +131,6 @@ function TodosPage() {
         throw new Error(`Couldn't add todo: ${data?.message}`)
       }
     } catch (err) {
-      console.error(err)
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_ERROR,
         payload: {
@@ -166,7 +166,6 @@ function TodosPage() {
         throw new Error(`Couldn't update todo: ${data?.message}`)
       }
     } catch (err) {
-      console.error(err)
       dispatch({
         type: TODO_ACTIONS.UPDATE_TODO_ERROR,
         payload: {
@@ -208,7 +207,6 @@ function TodosPage() {
         throw new Error(`Couldn't complete todo: ${data?.message}`)
       }
     } catch (err) {
-      console.error(err)
       dispatch({
         type: TODO_ACTIONS.COMPLETE_TODO_ERROR,
         payload: {
@@ -232,29 +230,29 @@ function TodosPage() {
         <Col>
           { isTodoListLoading && <p>Loading tasks...</p> }
           { error && (
-            <div className='error'>
-              <p>{error}</p>
-              <button onClick={
+            <div>
+              <p className='error'>{error}</p>
+              <Button className='btn-margin' onClick={
                 () => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })
               }>
                 Clear Error
-              </button>
+              </Button>
             </div>
           ) }
           {
             filterError && (
-              <div className='error'>
-                <p>{filterError}</p>
-                <button onClick={
+              <div>
+                <p className='error'>{filterError}</p>
+                <Button className='btn-margin' onClick={
                   () => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })
                 }>
                   Clear Filter Error
-                </button>
-                <button onClick={() => {
+                </Button>
+                <Button className='btn-margin' onClick={() => {
                   dispatch({ type: TODO_ACTIONS.RESET_FILTERS })
                 }}>
                   Reset Filters
-                </button>
+                </Button>
               </div>
             )
           }
