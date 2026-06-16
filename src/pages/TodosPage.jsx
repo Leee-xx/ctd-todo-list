@@ -3,6 +3,13 @@ import {
 	useReducer
 } from 'react'
 import { useSearchParams } from 'react-router'
+
+import Accordion from 'react-bootstrap/Accordion'
+import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
 import TodoList from '../features/Todos/TodoList/TodoList.jsx'
 import TodoForm from '../features/Todos/TodoForm.jsx'
 import SortBy from '../shared/SortBy.jsx'
@@ -124,7 +131,6 @@ function TodosPage() {
         throw new Error(`Couldn't add todo: ${data?.message}`)
       }
     } catch (err) {
-      console.error(err)
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_ERROR,
         payload: {
@@ -160,7 +166,6 @@ function TodosPage() {
         throw new Error(`Couldn't update todo: ${data?.message}`)
       }
     } catch (err) {
-      console.error(err)
       dispatch({
         type: TODO_ACTIONS.UPDATE_TODO_ERROR,
         payload: {
@@ -202,7 +207,6 @@ function TodosPage() {
         throw new Error(`Couldn't complete todo: ${data?.message}`)
       }
     } catch (err) {
-      console.error(err)
       dispatch({
         type: TODO_ACTIONS.COMPLETE_TODO_ERROR,
         payload: {
@@ -221,71 +225,103 @@ function TodosPage() {
   }
 
   return (
-    <div>
-      { isTodoListLoading && <p>Loading tasks...</p> }
-      { error && (
-        <div className='error'>
-          <p>{error}</p>
-          <button onClick={
-            () => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })
-          }>
-            Clear Error
-          </button>
-        </div>
-      ) }
-      {
-        filterError && (
-          <div className='error'>
-            <p>{filterError}</p>
-            <button onClick={
-              () => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })
-            }>
-              Clear Filter Error
-            </button>
-            <button onClick={() => {
-              dispatch({ type: TODO_ACTIONS.RESET_FILTERS })
-            }}>
-              Reset Filters
-            </button>
-          </div>
-        )
-      }
-      <SortBy
-        sortBy={sortBy}
-        sortDirection={sortDirection}
-        onSortByChange={(newSortBy) => {
-          dispatch({
-            type: TODO_ACTIONS.SET_SORT,
-            payload: {
-              sortBy: newSortBy,
-              sortDirection
-            }
-          })
-        }}
-        onSortDirectionChange={(newSortDirection) => {
-          dispatch({
-            type: TODO_ACTIONS.SET_SORT,
-            payload: {
-              sortBy,
-              sortDirection: newSortDirection
-            }
-          })
-        }}
-      />
-      <StatusFilter />
-      <FilterInput
-        filterTerm={filterTerm}
-        onFilterChange={(newTerm) => handleFilterChange(newTerm)}
-      />
-      <TodoForm onAddTodo={addTodo} />
-      <TodoList
-        todoList={todoList}
-        onCompleteTodo={completeTodo}
-        onUpdateTodo={updateTodo}
-        dataVersion={dataVersion}
-        statusFilter={statusFilter}
-      />
-    </div>
+    <Container fluid>
+      <Row>
+        <Col>
+          { isTodoListLoading && <p>Loading tasks...</p> }
+          { error && (
+            <div>
+              <p className='error'>{error}</p>
+              <Button className='btn-margin' onClick={
+                () => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })
+              }>
+                Clear Error
+              </Button>
+            </div>
+          ) }
+          {
+            filterError && (
+              <div>
+                <p className='error'>{filterError}</p>
+                <Button className='btn-margin' onClick={
+                  () => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })
+                }>
+                  Clear Filter Error
+                </Button>
+                <Button className='btn-margin' onClick={() => {
+                  dispatch({ type: TODO_ACTIONS.RESET_FILTERS })
+                }}>
+                  Reset Filters
+                </Button>
+              </div>
+            )
+          }
+        </Col>
+      </Row>
+      <Row>
+        <Col xs>
+          <Accordion>
+            <Accordion.Item eventKey='0'>
+              <Accordion.Header>Sort</Accordion.Header>
+              <Accordion.Body>
+                  <SortBy
+                    sortBy={sortBy}
+                    sortDirection={sortDirection}
+                    onSortByChange={(newSortBy) => {
+                      dispatch({
+                        type: TODO_ACTIONS.SET_SORT,
+                        payload: {
+                            sortBy: newSortBy,
+                            sortDirection
+                          }
+                        })
+                      }}
+                      onSortDirectionChange={(newSortDirection) => {
+                        dispatch({
+                          type: TODO_ACTIONS.SET_SORT,
+                          payload: {
+                            sortBy,
+                            sortDirection: newSortDirection
+                          }
+                        })
+                      }}
+                    />
+                </Accordion.Body>
+              </Accordion.Item>
+              {/* End sort options*/}
+            <Accordion.Item eventKey='1'>
+              <Accordion.Header>
+                Filters
+              </Accordion.Header>
+              <Accordion.Body>
+                <StatusFilter />
+                <FilterInput
+                  filterTerm={filterTerm}
+                  onFilterChange={(newTerm) => handleFilterChange(newTerm)}
+                />
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey='2'>
+              <Accordion.Header>
+                Add new todo
+              </Accordion.Header>
+              <Accordion.Body>
+                <TodoForm onAddTodo={addTodo} />
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </Col>
+      <Col>
+        <TodoList
+          todoList={todoList}
+          onCompleteTodo={completeTodo}
+          onUpdateTodo={updateTodo}
+          dataVersion={dataVersion}
+          statusFilter={statusFilter}
+        />
+      </Col>
+      </Row>
+    </Container>
   )
 }
 

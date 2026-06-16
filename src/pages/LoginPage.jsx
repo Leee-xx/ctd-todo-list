@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router'
+import Button from 'react-bootstrap/Button'
+import Stack from 'react-bootstrap/Stack'
+
 import { useAuth } from '../contexts/AuthContext.jsx'
 import TextInputWithLabel from '../shared/TextInputWithLabel.jsx'
 
@@ -36,25 +39,39 @@ export default function LoginPage() {
   }
 
   return(
-    <form onSubmit={handleSubmit}>
-      { authError && (<p className='error'>Error: {authError}</p>) }
-      <TextInputWithLabel
-        labelText='Email:'
-        elementId='email'
-        name='email'
-        value={email}
-        onChange={(e) => { setEmail(e.target.value) }}
-        required
-      />
-      <TextInputWithLabel
-        labelText='Password:'
-        elementId='password'
-        name='password'
-        value={password}
-        onChange={(e) => { setPassword(e.target.value) }}
-        required
-      />
-      <button type='submit' disabled={isLoggingOn}>{isLoggingOn ? "Logging in..." : "Log in"}</button>
-    </form>
+    <Stack direction='vertical'>
+      <form onSubmit={handleSubmit}>
+        { authError && (<p className='error'>Error: {authError}</p>) }
+        <div className='p2'>
+          <TextInputWithLabel
+            labelText='Email:'
+            elementId='email'
+            name='email'
+            value={email}
+            onChange={(e) => { setEmail(e.target.value) }}
+            required
+          />
+        </div>
+        <div className='p2'>
+          <TextInputWithLabel
+            labelText='Password:'
+            elementId='password'
+            name='password'
+            type='password'
+            value={password}
+            onChange={(e) => { setPassword(e.target.value) }}
+            required
+          />
+        </div>
+        <div className='p2'>
+          <Button
+            type='submit'
+            disabled={isLoggingOn}
+          >
+            {isLoggingOn ? "Logging in..." : "Log in"}
+          </Button>
+        </div>
+      </form>
+    </Stack>
   )
 }

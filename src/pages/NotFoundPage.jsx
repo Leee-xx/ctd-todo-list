@@ -1,9 +1,12 @@
-import { Link } from 'react-router'
+import { Link, useLocation } from 'react-router'
 
 export default function NotFoundPage() {
+  const location = useLocation()
+  const path = location.pathname || ''
+
   return(
     <div>
-      <h1>Not found</h1>
+      <h2>Page not found{ path ? `: ${path}` : '' }</h2>
       <Link to='/'>
         Home
       </Link>

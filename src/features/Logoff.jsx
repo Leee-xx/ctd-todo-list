@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useAuth } from '../contexts/AuthContext.jsx'
 
+import Button from 'react-bootstrap/Button'
+
 export default function Logoff() {
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const [authError, setAuthError] = useState('')
@@ -27,9 +29,14 @@ export default function Logoff() {
   return(
     <form onSubmit={handleLogoff}>
       { authError && (<p className='error'>Error: {authError}</p>) }
-      <button disabled={isLoggingOut}>
+      <Button
+        type='submit'
+        disabled={isLoggingOut}
+        variant='outline-danger'
+        className='btn-margin'
+      >
         Log out
-      </button>
+      </Button>
     </form>
   )
 }
