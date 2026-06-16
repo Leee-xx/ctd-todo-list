@@ -4,7 +4,7 @@ export default function AboutPage() {
       <h1>About this app</h1>
       <p>
         This app offers to-do list functionality that allows users to mark
-        items as completed and keyword filtering. It also supports user
+        items as completed and filter by keyword. It also supports user
         authentication and React Routing (including protected routes).
       </p>
 
